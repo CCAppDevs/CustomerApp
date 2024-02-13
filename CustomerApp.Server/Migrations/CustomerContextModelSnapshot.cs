@@ -52,7 +52,7 @@ namespace CustomerApp.Server.Migrations
 
                     b.HasKey("AddressID");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("CustomerApp.Server.Models.Customer", b =>
@@ -76,7 +76,7 @@ namespace CustomerApp.Server.Migrations
 
                     b.HasKey("CustomerID");
 
-                    b.ToTable("Customer");
+                    b.ToTable("Customer", (string)null);
                 });
 
             modelBuilder.Entity("CustomerApp.Server.Models.CustomerAddress", b =>
@@ -99,7 +99,7 @@ namespace CustomerApp.Server.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("CustomerAddress");
+                    b.ToTable("CustomerAddress", (string)null);
                 });
 
             modelBuilder.Entity("CustomerApp.Server.Models.Email", b =>
@@ -121,7 +121,7 @@ namespace CustomerApp.Server.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Email");
+                    b.ToTable("Email", (string)null);
                 });
 
             modelBuilder.Entity("CustomerApp.Server.Models.Phone", b =>
@@ -143,7 +143,7 @@ namespace CustomerApp.Server.Migrations
 
                     b.HasIndex("CustomerID");
 
-                    b.ToTable("Phone");
+                    b.ToTable("Phone", (string)null);
                 });
 
             modelBuilder.Entity("CustomerApp.Server.Models.CustomerAddress", b =>
