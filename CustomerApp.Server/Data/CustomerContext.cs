@@ -12,8 +12,17 @@ namespace CustomerApp.Server.Data
         public CustomerContext (DbContextOptions<CustomerContext> options)
             : base(options)
         {
+            
         }
 
         public DbSet<Customer> Customer { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // auto include phone numbers with every customer
+            modelBuilder.Entity<Customer>().Navigation<Phone>(c => c.PhoneNumbers).AutoInclude();
+        }
     }
 }

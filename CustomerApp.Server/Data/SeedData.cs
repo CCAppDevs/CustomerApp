@@ -1,4 +1,6 @@
-﻿namespace CustomerApp.Server.Data
+﻿using CustomerApp.Server.Models;
+
+namespace CustomerApp.Server.Data
 {
     public class SeedData
     {
@@ -17,13 +19,21 @@
             // check if we have any data in the database
             if (!context.Customer.Any())
             {
-                // seed the database
-                context.Customer.Add(new Models.Customer
+                Customer jesse = new Customer
                 {
                     FirstName = "Jesse",
                     LastName = "Harlan",
-                    Birthdate = DateTime.Now,
-                });
+                    Birthdate = new DateTime(1982, 04, 14),
+                    PhoneNumbers = new List<Phone>
+                    {
+                        new Phone { PhoneNumber = "3605551212" },
+                        new Phone { PhoneNumber = "3605551213" },
+                    }
+                };
+
+                // seed the database
+                context.Customer.Add(jesse);
+
 
                 await context.SaveChangesAsync();
 
