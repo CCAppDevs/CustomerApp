@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerItemComponent } from './customer-item/customer-item.component';
+import { CustomerService } from './customer.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { CustomerItemComponent } from './customer-item/customer-item.component';
   imports: [
     BrowserModule, HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CustomerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

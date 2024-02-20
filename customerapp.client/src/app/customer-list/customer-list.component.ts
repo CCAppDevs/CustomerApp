@@ -1,31 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.css']
 })
-export class CustomerListComponent {
-  customers: Customer[] = [
-    {
-      customerID: 0,
-      firstName: "Jesse",
-      lastName: "Harlan",
-      birthdate: new Date(),
-      phoneNumbers: [],
-      emails: [],
-      addresses: []
-    },
-    {
-      customerID: 1,
-      firstName: "Sarah",
-      lastName: "Harlan",
-      birthdate: new Date(),
-      phoneNumbers: [],
-      emails: [],
-      addresses: []
-    }
-  ];
+export class CustomerListComponent implements OnInit {
+  customers: Customer[] = [];
 
+  constructor(private data: CustomerService) {
+
+  }
+
+  ngOnInit() {
+    this.customers = this.data.getAllCustomers();
+  }
 }
