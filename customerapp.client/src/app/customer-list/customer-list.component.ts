@@ -15,6 +15,12 @@ export class CustomerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.customers = this.data.getAllCustomers();
+    this.data.getAllCustomers().subscribe(data => {
+      this.customers = data;
+    });
+  }
+
+  onGetAll(data: Customer[]) {
+    this.customers = data;
   }
 }

@@ -9,12 +9,33 @@ import { CustomerService } from './customer.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private http: HttpClient, private data: CustomerService) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log(this.data.customers);
-    this.data.getAllCustomers();
+    //this.execute(this.onSuccess, this.onFailure);
+    
   }
 
+  //execute(success: Function, failure: Function) {
+  //  try {
+  //    throw new DOMException();
+  //    success();
+  //  } catch (ex) {
+  //    failure();
+  //  }
+  //}
+
+  //onSuccess() {
+  //  console.log("success");
+  //  // when successful, do this
+  //}
+
+  //onFailure() {
+  //  console.log("failed");
+  //  // on failure, do this
+  //}
+
+
   title = 'Customer App Dashboard';
+
 }

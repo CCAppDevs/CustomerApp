@@ -1,36 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Customer } from './customer';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  customers: Customer[] = [
-    {
-      customerID: 0,
-      firstName: "Jesse",
-      lastName: "Harlan",
-      birthdate: new Date(),
-      phoneNumbers: [],
-      emails: [],
-      addresses: []
-    },
-    {
-      customerID: 1,
-      firstName: "Sarah",
-      lastName: "Harlan",
-      birthdate: new Date(),
-      phoneNumbers: [],
-      emails: [],
-      addresses: []
-    }
-  ];
+  customers: Customer[] = [];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getAllCustomers() {
-    return this.customers;
+    return this.http.get<Customer[]>("/api/Customers");
   }
 
   getCustomerById(id: number) {
