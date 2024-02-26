@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Customer } from './customer';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
 
-  customers: Customer[] = [];
+  customers$: BehaviorSubject<Customer[]> = new BehaviorSubject<Customer[]>([]);
+  customer$: Subject<Customer> = new Subject<Customer>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getAllCustomers();
+  }
 
   getAllCustomers() {
-    return this.http.get<Customer[]>("/api/Customers");
+    this.http.get<Customer[]>("/api/Customers").subscribe(data => {
+      this.customers$.next(data);
+    });
   }
 
   getCustomerById(id: number) {
     // return a single customer /api/Customers/5
-    return this.http.get<Customer>("/api/Customers/" + id);
+    this.http.get<Customer>("/api/Customers/" + id).subscribe(data => {
+      this.customer$.next(data);
+    });
   }
 
   createCustomer(cust: Customer) {

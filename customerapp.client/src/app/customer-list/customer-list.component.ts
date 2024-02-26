@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-customer-list',
@@ -8,19 +9,13 @@ import { CustomerService } from '../customer.service';
   styleUrls: ['./customer-list.component.css']
 })
 export class CustomerListComponent implements OnInit {
-  customers: Customer[] = [];
+  customers: BehaviorSubject<Customer[]> = this.data.customers$;
 
   constructor(private data: CustomerService) {
 
   }
 
   ngOnInit() {
-    this.data.getAllCustomers().subscribe(data => {
-      this.customers = data;
-    });
-  }
-
-  onGetAll(data: Customer[]) {
-    this.customers = data;
+    this.data.getAllCustomers();
   }
 }
