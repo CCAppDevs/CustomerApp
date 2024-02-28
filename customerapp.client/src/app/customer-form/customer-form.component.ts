@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
 
@@ -12,8 +12,8 @@ export class CustomerFormComponent {
 
   customerForm: FormGroup = this.fb.group({
     customerID: [0],
-    firstName: ['Johnny'],
-    lastName: ['Doe'],
+    firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+    lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
     birthdate: [new Date()],
     phoneNumbers: this.fb.array([]),
     emails: this.fb.array([]),
@@ -22,6 +22,14 @@ export class CustomerFormComponent {
 
   constructor(private fb: FormBuilder, private data: CustomerService) {
 
+  }
+
+  get phoneNumbers() {
+    return this.customerForm.get('phoneNumbers') as FormArray;
+  }
+
+  addPhone() {
+    this.phoneNumbers.push(this.fb.control(''));
   }
 
   onSubmit() {
@@ -38,10 +46,7 @@ export class CustomerFormComponent {
       addresses: this.customerForm.get('addresses')?.value
     }
 
-    this.data.createCustomer(customer).subscribe(data => {
-      console.log('success', data);
-      this.data.getAllCustomers();
-    })
+    this.data.createCustomer(customer);
   }
 
 }

@@ -30,7 +30,11 @@ export class CustomerService {
 
   createCustomer(cust: Customer) {
     //post
-    return this.http.post<Customer>("/api/Customers", cust);
+    this.http.post<Customer>("/api/Customers", cust).subscribe(data => {
+      let arr = this.customers$.getValue();
+      arr.push(data);
+      this.customers$.next(arr);
+    });
   }
 
   updateCustomer(id: number, cust: Customer) {
