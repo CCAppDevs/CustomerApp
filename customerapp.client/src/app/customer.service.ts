@@ -16,6 +16,7 @@ export class CustomerService {
   }
 
   getAllCustomers() {
+    console.log('getting all customers');
     this.http.get<Customer[]>("/api/Customers").subscribe(data => {
       this.customers$.next(data);
     });
@@ -44,6 +45,9 @@ export class CustomerService {
 
   deleteCustomer(id: number) {
     // delete
-    this.http.delete<any>("/api/Customers/" + id);
+    console.log('delete has fired');
+    this.http.delete<any>("/api/Customers/" + id).subscribe(data => {
+      this.getAllCustomers();
+    });
   }
 }

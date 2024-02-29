@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Customer } from '../customer';
+import { CustomerService } from '../customer.service';
 
 @Component({
   selector: 'app-customer-item',
@@ -16,4 +17,11 @@ export class CustomerItemComponent {
     emails: [],
     addresses: []
   };
+
+  constructor(private data: CustomerService) { }
+
+  onDelete() {
+    console.log("deleting", this.customer);
+    this.data.deleteCustomer(this.customer.customerID);
+  }
 }

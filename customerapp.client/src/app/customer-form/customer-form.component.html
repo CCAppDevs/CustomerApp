@@ -11,10 +11,12 @@
 
     <div formArrayName="phoneNumbers">
       <button (click)="addPhone()">Add a New Phone Number</button>
-      <div *ngFor="let phoneNumber of phoneNumbers.controls; let i=index">
+      <div *ngFor="let phone of phoneNumbers.controls; let i=index">
         <!-- The repeated alias template -->
-        <label for="phoneNumber-{{ i }}">Phone Number:</label>
-        <input id="phoneNumber-{{ i }}" type="text" [formControlName]="i">
+        <div [formGroupName]="i">
+          <label for="phone-{{ i }}">Phone Number:</label>
+          <input id="phone-{{ i }}" type="text" formControlName="phoneNumber">
+        </div>
       </div>
     </div>
 

@@ -4,7 +4,12 @@ export interface Customer {
   firstName: string;
   lastName: string;
   birthdate: Date;
-  phoneNumbers: any[];
+  phoneNumbers: Phone[];
   emails: any[];
   addresses: any[];
+}
+
+export interface Phone {
+  phoneId: number;
+  phoneNumber: string;
 }

@@ -15,10 +15,12 @@ namespace CustomerApp.Server.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly CustomerContext _context;
+        private readonly ILogger<CustomersController> _logger;
 
-        public CustomersController(CustomerContext context)
+        public CustomersController(CustomerContext context, ILogger<CustomersController> logger)
         {
             _context = context;
+            this._logger = logger;
         }
 
         // GET: api/Customers
@@ -78,6 +80,7 @@ namespace CustomerApp.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
+            this._logger.LogDebug("The post request got the following: {0}", customer);
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 

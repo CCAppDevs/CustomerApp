@@ -24,12 +24,27 @@ export class CustomerFormComponent {
 
   }
 
+  initForm() {
+    this.customerForm = this.fb.group({
+      customerID: [0],
+      firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
+      birthdate: [new Date()],
+      phoneNumbers: this.fb.array([]),
+      emails: this.fb.array([]),
+      addresses: this.fb.array([])
+    });
+  }
+
   get phoneNumbers() {
     return this.customerForm.get('phoneNumbers') as FormArray;
   }
 
   addPhone() {
-    this.phoneNumbers.push(this.fb.control(''));
+    this.phoneNumbers.push(this.fb.group({
+      phoneId: [0],
+      phoneNumber: ['']
+    }));
   }
 
   onSubmit() {
@@ -47,6 +62,7 @@ export class CustomerFormComponent {
     }
 
     this.data.createCustomer(customer);
+    this.initForm();
   }
 
 }
